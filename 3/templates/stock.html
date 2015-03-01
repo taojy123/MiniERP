@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 class="sub-header">Stock</h2>
+
+    <table id="table">
+        <thead>
+            <tr>
+                <th data-sortable="true">Product ID</th>
+                <th data-sortable="true">Name</th>
+                <th data-sortable="true">Price</th>
+                <th data-sortable="true">Quantity</th>
+                <th data-sortable="true">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in stocks %}
+                <tr >
+                    <td>{{ r.product.pid }}</td>
+                    <td>{{ r.product.name }}</td>
+                    <td>$ {{ r.product.price }}</td>
+                    <td>{{ r.quantity }}</td>
+                    <td>$ {% widthratio r.product.price 1 r.quantity %}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div>
+        <a class="btn btn-primary" href="/stock/export/stock.csv">Export</a>
+    </div>
+
+
+{% endblock %}
+
+
+{% block script %}
+    <script>
+        $('#table').bootstrapTable()
+
+        $("#stock").addClass('active')
+
+        $("#add_btn").click(function(){
+            $("#form").fadeToggle()
+        })
+
+        $(".modify_btn").click(function(){
+            $("#modify").fadeIn()
+            var id = $(this).attr("data-id")
+            var name = $(this).attr("data-name")
+            var phone = $(this).attr("data-phone")
+            var email = $(this).attr("data-email")
+            $("#modify [name='id']").val(id)
+            $("#modify [name='name']").val(name)
+            $("#modify [name='phone']").val(phone)
+            $("#modify [name='email']").val(email)
+        })
+
+    </script>
+{% endblock %}
