@@ -1,0 +1,3 @@
+Name,Phone,Email
+{% for r in customers %}{{ r.name }},{{ r.phone }},{{ r.email }}
+{% endfor %}
