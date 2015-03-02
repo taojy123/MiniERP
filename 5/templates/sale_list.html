@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 class="sub-header">Sale</h2>
+
+    <table id="table">
+        <thead>
+            <tr>
+                <th data-sortable="true">Product ID</th>
+                <th data-sortable="true">Name</th>
+                <th data-sortable="true">Price</th>
+                <th data-sortable="true">Customer</th>
+                <th data-sortable="true">Quantity</th>
+                <th data-sortable="true">Time</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in sales %}
+                <tr >
+                    <td>{{ r.product.pid }}</td>
+                    <td>{{ r.product.name }}</td>
+                    <td>$ {{ r.product.price }}</td>
+                    <td><a href="/customer/info/{{ r.customer.id }}/">{{ r.customer.name }}</a></td>
+                    <td>{{ r.quantity }}</td>
+                    <td>{{ r.time|date:"Y-m-d H:i:s" }}</td>
+                    <td>
+                        <a class="btn btn-xs btn-danger" href="/sale/del/{{ r.id }}/" onclick="return confirm('Are you sure to delete it?')">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    <div id="add" style="margin-top: 100px">
+        <label  class="col-sm-2 control-label" ></label>
+        <button id="add_btn" class="btn btn-primary">Add a new Sale record</button>
+
+        <form id="form" action="/sale/add/" method="POST" class="form-horizontal" style="margin-top: 30px;display: none">
+
+            <div class="form-group">
+                <label  class="col-sm-2 control-label" >Product:</label>
+                <select class="form-control" style="display:inline;width:auto;" name="product_id">
+                    {% for r in products %}
+                        <option value="{{ r.id }}">{{ r.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label  class="col-sm-2 control-label" >Customer:</label>
+                <select class="form-control" style="display:inline;width:auto;" name="customer_id">
+                    {% for r in customers %}
+                        <option value="{{ r.id }}">{{ r.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label  class="col-sm-2 control-label" >Quantity:</label>
+                <input type="text" class="form-control"  style="display:inline;width:auto;" name="quantity" >
+            </div>
+
+            <div class="form-group">
+                <label  class="col-sm-2 control-label" ></label>
+                <button type="submit" class="btn btn-success" >Submit</button>
+            </div>
+        </form>
+
+    </div>
+
+
+
+{% endblock %}
+
+
+{% block script %}
+    <script>
+        $('#table').bootstrapTable()
+
+        $("#sale_list").addClass('active')
+
+        $("#add_btn").click(function(){
+            $("#form").fadeToggle()
+        })
+
+    </script>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 class="sub-header">Stock</h2>
+
+    <table id="table">
+        <thead>
+            <tr>
+                <th data-sortable="true">Product ID</th>
+                <th data-sortable="true">Name</th>
+                <th data-sortable="true">Price</th>
+                <th data-sortable="true">Quantity</th>
+                <th data-sortable="true">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in stocks %}
+                <tr >
+                    <td>{{ r.product.pid }}</td>
+                    <td>{{ r.product.name }}</td>
+                    <td>$ {{ r.product.price }}</td>
+                    <td>{{ r.quantity }}</td>
+                    <td>$ {% widthratio r.product.price 1 r.quantity %}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div>
+        <a class="btn btn-primary" href="/stock/export/stock.csv">Export</a>
+    </div>
+
+
+{% endblock %}
+
+
+{% block script %}
+    <script>
+        $('#table').bootstrapTable()
+
+        $("#stock").addClass('active')
+
+        $("#add_btn").click(function(){
+            $("#form").fadeToggle()
+        })
+
+    </script>
+{% endblock %}
