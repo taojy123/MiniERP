@@ -1,0 +1,3 @@
+Product ID,Name,Price,Customer,Quantity,Time
+{% for r in sales %}{{ r.product.pid }},{{ r.product.name }},$ {{ r.product.price }},{{ r.customer.name }},{{ r.quantity }},{{ r.time|date:"Y-m-d H:i:s" }}
+{% endfor %}

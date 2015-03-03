@@ -1,0 +1,3 @@
+Product ID,Name,Price,Quantity,Subtotal
+{% for r in stocks %}{{ r.product.pid }},{{ r.product.name }},$ {{ r.product.price }},{{ r.quantity }},$ {% widthratio r.product.price 1 r.quantity %}
+{% endfor %}
