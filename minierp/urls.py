@@ -26,7 +26,7 @@ urlpatterns = patterns('',
     ('^supplier/info/(\w+)/$', supplier_info),
     ('^supplier/export/supplier.csv$', supplier_export),
 
-    ('^stock/list$', stock_list),
+    ('^stock/list/$', stock_list),
     ('^stock/export/stock.csv$', stock_export),
 
     ('^purchase/list/$', purchase_list),
