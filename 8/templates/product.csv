@@ -1,0 +1,3 @@
+Product ID,Name,Price
+{% for r in products %}{{ r.pid }},{{ r.name }},$ {{ r.price }}
+{% endfor %}
