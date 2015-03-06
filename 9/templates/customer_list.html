@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 class="sub-header">Customer</h2>
+
+    <table id="table">
+        <thead>
+            <tr>
+                <th data-sortable="true">Name</th>
+                <th data-sortable="true">Phone</th>
+                <th data-sortable="true">Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in customers %}
+                <tr >
+                    <td>{{ r.name }}</td>
+                    <td>{{ r.phone }}</td>
+                    <td>{{ r.email }}</td>
+                    <td>
+                        <a class="btn btn-xs btn-danger" href="/customer/del/{{ r.id }}/" onclick="return confirm('Are you sure to delete it?')">Delete</a>
+                        <a class="btn btn-xs btn-primary modify_btn"
+                           data-id="{{ r.id }}"
+                           data-name="{{ r.name }}"
+                           data-phone="{{ r.phone }}"
+                           data-email="{{ r.email }}"
+                           href="#modify" >Modify</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div>
+        <a class="btn btn-primary" href="/customer/export/customer.csv">Export</a>
+    </div>
+
+    <div id="modify" style="margin-top: 20px; display: none">
+        <form action="/customer/update/" method="POST" class="form-horizontal">
+
+            <div class="form-group">
+                <label  class="col-sm-2 control-label" >Name:</label>
+                <input type="text" class="form-control"  style="display:inline;width:auto;" name="name" >
+            </div>
+            <div class="form-group">
+                <label  class="col-sm-2 control-label" >Phone:</label>
+                <input type="text" class="form-control"  style="display:inline;width:auto;" name="phone" >
+            </div>
+            <div class="form-group">
+                <label  class="col-sm-2 control-label" >Email:</label>
+                <input type="text" class="form-control"  style="display:inline;width:auto;" name="email" >
+            </div>
+
+            <input type="hidden" name="id">
+
+            <div class="form-group">
+                <label  class="col-sm-2 control-label" ></label>
+                <button type="submit" class="btn btn-success">Update</button>
+            </div>
+        </form>
+    </div>
+
+
+    <div id="add" style="margin-top: 100px">
+        <label  class="col-sm-2 control-label" ></label>
+        <button id="add_btn" class="btn btn-warning">Add a new customer</button>
+
+        <form id="form" action="/customer/add/" method="POST" class="form-horizontal" style="margin-top: 30px;display: none">
+
+            <div class="form-group">
+                <label  class="col-sm-2 control-label" >Name:</label>
+                <input type="text" class="form-control"  style="display:inline;width:auto;" name="name" >
+            </div>
+            <div class="form-group">
+                <label  class="col-sm-2 control-label" >Phone:</label>
+                <input type="text" class="form-control"  style="display:inline;width:auto;" name="phone" >
+            </div>
+            <div class="form-group">
+                <label  class="col-sm-2 control-label" >Email:</label>
+                <input type="text" class="form-control"  style="display:inline;width:auto;" name="email" >
+            </div>
+
+            <div class="form-group">
+                <label  class="col-sm-2 control-label" ></label>
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </form>
+
+    </div>
+
+
+
+{% endblock %}
+
+
+{% block script %}
+    <script>
+        $('#table').bootstrapTable()
+
+        $("#customer_list").addClass('active')
+
+        $("#add_btn").click(function(){
+            $("#form").fadeToggle()
+        })
+
+        $(".modify_btn").click(function(){
+            $("#modify").fadeIn()
+            var id = $(this).attr("data-id")
+            var name = $(this).attr("data-name")
+            var phone = $(this).attr("data-phone")
+            var email = $(this).attr("data-email")
+            $("#modify [name='id']").val(id)
+            $("#modify [name='name']").val(name)
+            $("#modify [name='phone']").val(phone)
+            $("#modify [name='email']").val(email)
+        })
+
+    </script>
+{% endblock %}

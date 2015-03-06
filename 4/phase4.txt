@@ -1,0 +1,12 @@
+第四次迭代
+完成采购入库功能点的开发
+
+首先创建一个采购对象 Purchase，用来储存采购记录
+Purchase 对象含有4个属性 
+product 属性是 Product 对象的外键，指向一件商品
+supplier 属性是 Supplier 对象的外键，指向一名供应商
+quantity 表示采购数量默认值为 0 
+time 记录时间，为默认当前时间
+
+在 views 中添加对应的显示、添加、删除方法
+在 urls 中添加对应的路由

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 class="sub-header">{{ customer.name }}</h2>
+
+    <div style="color: #428bca">
+
+        <div class="form-group">
+            <label  class="col-sm-2 control-label" >Name:</label>
+            <span >{{ customer.name }}</span>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-2 control-label" >Phone:</label>
+            <span >{{ customer.phone }}</span>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-2 control-label" >Email:</label>
+            <span >{{ customer.email }}</span>
+        </div>
+
+    </div>
+
+{% endblock %}
+

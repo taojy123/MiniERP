@@ -1,0 +1,16 @@
+第一次迭代
+完成 django 框架的搭建，以及商品资料维护功能点的开发
+
+关于 django 框架搭建
+1、minierp 是主要的 Python 程序所在。
+2、minierp 中的 models.py 是描述数据模型的，第一次迭代加入了 Product 产品对象
+3、minierp 中的 views.py 是主要的业务逻辑，这里做了一个简单的无功能的首页，和 Product 的增删改查
+4、minierp 中的 urls.py 用来指定路由请求对应的 views 中的处理方法，基本上是和 views.py 一一对应的
+5、minierp 中的settings.py 是配置文件，可以在其中修改所要使用的数据库信息
+6、templates 文件夹中放置各个页面的模板文件，其中 base.html 是基础模板
+7、static 文件夹中放置各种静态文件，比如 js、css 之类的
+
+运行网站服务使用如下命令
+python manage.py syncdb
+python manage.py runserver
+然后在浏览器打开 http://127.0.0.1:8000/product/list/
